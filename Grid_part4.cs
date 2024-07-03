@@ -83,6 +83,12 @@ public class Grid : MonoBehaviour
         meshFilter.mesh = mesh;
 
         MeshRenderer meshRenderer = gameObject.AddComponent<MeshRenderer>();
+
+        MeshCollider collider = gameObject.AddComponent<MeshCollider>();
+        collider.cookingOptions = MeshColliderCookingOptions.CookForFasterSimulation | MeshColliderCookingOptions.EnableMeshCleaning | MeshColliderCookingOptions.WeldColocatedVertices | MeshColliderCookingOptions.UseFastMidphase;
+        collider.convex = false;
+        collider.sharedMesh = mesh;
+        collider.enabled = true;
     }
 
     void DrawEdgeMesh(Cell[,] grid) {
