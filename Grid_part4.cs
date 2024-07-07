@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Grid : MonoBehaviour
+public class Grid_part4 : MonoBehaviour
 {
     public Material terrainMaterial;
     public Material edgeMaterial;
     public float waterLevel = .4f;
-    public float scale = .1f;
-    public int size = 100;
+    public float islandScale = .1f;
+    public float tileScale = 2f;
+    private int size = 100;
 
     Cell[,] grid;
 
@@ -16,7 +17,7 @@ public class Grid : MonoBehaviour
         (float xOffset, float yOffset) = (Random.Range(-10000f, 10000f), Random.Range(-10000f, 10000f));
         for(int y = 0; y < size; y++) {
             for(int x = 0; x < size; x++) {
-                float noiseValue = Mathf.PerlinNoise(x * scale + xOffset, y * scale + yOffset);
+                float noiseValue = Mathf.PerlinNoise(x * islandScale + xOffset, y * islandScale + yOffset);
                 noiseMap[x, y] = noiseValue;
             }
         }
@@ -179,7 +180,7 @@ public class Grid : MonoBehaviour
             for(int x = 0; x < size; x++) {
                 Cell cell = grid[x, y];
                 if(cell.isWater)
-                    colorMap[y * size + x] = Color.blue;
+                    colorMap[y * size + x] = Color.green;
                 else
                     colorMap[y * size + x] = Color.green;
             }
@@ -206,5 +207,10 @@ public class Grid : MonoBehaviour
                 Gizmos.DrawCube(pos, Vector3.one);
             }
         }
+    }
+
+    private void Update()
+    {
+        transform.localScale = new Vector3(tileScale, 1, tileScale);
     }
 }
