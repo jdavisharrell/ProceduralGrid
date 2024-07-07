@@ -8,6 +8,8 @@ public class Grid_part4 : MonoBehaviour
     public float waterLevel = .4f;
     public float islandScale = .1f;
     public float tileScale = 2f;
+    public float tileShiftX = 0f;
+    public float tileShiftZ = 0f;
     private int size = 100;
 
     Cell[,] grid;
@@ -212,5 +214,6 @@ public class Grid_part4 : MonoBehaviour
     private void Update()
     {
         transform.localScale = new Vector3(tileScale, 1, tileScale);
+        transform.position = new Vector3(tileShiftX, 0, tileShiftZ);
     }
 }
